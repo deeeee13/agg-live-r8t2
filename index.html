@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>AGGRESSIVE paper profile agg-v1</title><style>
+body{font-family:system-ui,sans-serif;background:#1a0d0d;color:#f3e6e6;margin:0;padding:16px;max-width:900px}
+.banner{background:#b3261e;color:#fff;padding:10px 14px;border-radius:8px;font-weight:700}
+.card{background:#2a1515;border:1px solid #5a2a2a;border-radius:8px;padding:12px;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px solid #4a2525;padding:4px;text-align:left}
+.tag{display:inline-block;background:#ffb300;color:#000;border-radius:4px;padding:2px 6px;font-weight:700}</style></head><body>
+<div class=banner>AGGRESSIVE PROFILE · PAPER ONLY · SEPARATE FROM THE CONSERVATIVE BOT</div>
+<h1>Aggressive paper profile: agg-v1</h1>
+<p>Status: <span class=tag>TESTED_NOT_ACTIVATED</span>. Not activated and not trading. The conservative live account is on its own page:
+<a style="color:#9cf" href="https://deeeee13.github.io/btc-live-q7x3/">btc-live-q7x3</a>.</p>
+<div class=card><h2>Live aggressive account</h2><p><b>No live aggressive paper account is running.</b> This profile is not connected to any trading worker. There are no real-time aggressive trades or balances to show.</p></div>
+<div class=card><h2>Configured risk (this profile only)</h2><ul>
+<li>Starting capital (config): $300</li><li>Risk per trade: 0.5% of equity</li>
+<li>Daily loss limit: 2% of equity, counting realized and unrealized losses</li><li>Max positions: 2; max combined open risk 1%</li>
+<li>Leverage: 1x (2x tested for research only)</li><li>Coins: BTC, ETH, SOL, HYPE · setups A retest / B momentum / C rejection · 15m/5m/1m (1h context)</li></ul></div>
+<div class=card><h2>Evaluation: historical simulation, not real paper trades</h2>
+<p>Backtest on public Hyperliquid candles, with fees, funding, slippage and minimum order sizes. None of these fills are real-time paper trades.</p>
+<table><tr><th>window</th><th>profile</th><th>trades</th><th>win</th><th>net $</th><th>exp R</th><th>PF</th><th>fees $</th><th>maxDD %</th></tr><tr><td>W1_1m (3.47d, 1m bars)</td><td>conservative</td><td>9</td><td>33%</td><td>-1.63</td><td>-0.241</td><td>0.7</td><td>1.49</td><td>1.3</td></tr><tr><td>W1_1m (3.47d, 1m bars)</td><td>aggressive_1x</td><td>22</td><td>59%</td><td>+13.50</td><td>0.496</td><td>2.14</td><td>5.60</td><td>1.87</td></tr><tr><td>W1_1m (3.47d, 1m bars)</td><td>aggressive_2x_research</td><td>14</td><td>71%</td><td>+14.28</td><td>0.844</td><td>2.77</td><td>5.49</td><td>1.09</td></tr><tr><td>W2_5m (15.36d, 5m bars)</td><td>conservative</td><td>26</td><td>42%</td><td>+0.65</td><td>0.036</td><td>1.04</td><td>4.32</td><td>1.48</td></tr><tr><td>W2_5m (15.36d, 5m bars)</td><td>aggressive_1x</td><td>88</td><td>33%</td><td>-19.73</td><td>-0.296</td><td>0.72</td><td>19.99</td><td>7.06</td></tr><tr><td>W2_5m (15.36d, 5m bars)</td><td>aggressive_2x_research</td><td>66</td><td>39%</td><td>-9.48</td><td>-0.099</td><td>0.86</td><td>22.79</td><td>6.52</td></tr></table>
+<p><b>Verdict:</b> not activated. Over the 15-day window the aggressive profile lost money after costs, with fees about equal to the loss. The small positive 3.5-day result did not hold up.</p></div>
+<p style="opacity:.6;font-size:12px">Published 2026-11-05 19:03 (PHT, UTC+8) · status.json has the same data</p></body></html>
