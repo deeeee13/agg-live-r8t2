@@ -1,28 +1,78 @@
-<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
-<title>AGGRESSIVE paper profile agg-v1</title><style>
-body{font-family:system-ui,sans-serif;background:#1a0d0d;color:#f3e6e6;margin:0;padding:16px;max-width:900px}
-.banner{background:#b3261e;color:#fff;padding:10px 14px;border-radius:8px;font-weight:700}
-.card{background:#2a1515;border:1px solid #5a2a2a;border-radius:8px;padding:12px;margin:12px 0}
-table{border-collapse:collapse;width:100%;font-size:13px}td,th{border-bottom:1px solid #4a2525;padding:4px;text-align:left}
-.tag{display:inline-block;background:#ffb300;color:#000;border-radius:4px;padding:2px 6px;font-weight:700}</style></head><body>
-<div class=banner>AGGRESSIVE PROFILE · PAPER ONLY · PARALLEL FORWARD TEST · SEPARATE ACCOUNT FROM THE CONSERVATIVE BOT</div>
-<h1>Aggressive paper profile: agg-v1</h1>
-<p>Status: <span class=tag>FORWARD_PAPER</span>: a live paper forward test running in parallel with the conservative bot, on its own separate $300 paper account. No real money. Conservative account:
-<a style="color:#9cf" href="https://deeeee13.github.io/btc-live-q7x3/">btc-live-q7x3</a>.</p>
-<div class=card><h2>Live aggressive paper account (forward test, real-time)</h2><p>Worker: <b>RUNNING</b> · State: <span class=tag>ACTIVE</span>  </p>
-<p style="font-size:22px"><b>Cash $299.87</b> · Equity $300.18 (+0.06%) · Unrealized $+0.32</p>
-<p>Start $300 (separate aggressive paper account) · Daily P&L +0.32 / limit -$6.00 · entries today 1</p>
-<p>Forward trades closed: 0 · wins 0 · net $+0.00 · fees $0.00</p>
-<p style="font-size:13px">Feeds: BTC: OK · ETH: OK · SOL: thin_book · HYPE: thin_book</p>
-<h3>Open positions</h3><table><tr><th>coin</th><th>dir</th><th>setup</th><th>entry</th><th>stop</th><th>target</th><th>size</th><th>risk</th></tr><tr><td>SOL</td><td>short</td><td>C</td><td>96.5969</td><td>96.8366</td><td>96.1174</td><td>3.1</td><td>$0.74</td></tr></table>
-<h3>Closed forward-test trades (live paper)</h3><table><tr><th>exit (PHT)</th><th>coin</th><th>dir</th><th>setup</th><th>exit</th><th>net $</th><th>R</th></tr><tr><td colspan=7>No closed forward-test trades yet</td></tr></table>
-<p style="font-size:12px;opacity:.7">Signals/rejections: {&quot;signal_A&quot;: 1, &quot;rej_symbol_thin_book&quot;: 1, &quot;signal_C&quot;: 1, &quot;accepted_C&quot;: 1, &quot;feed_error&quot;: 2}</p></div>
-<div class=card><h2>Configured risk (this profile only)</h2><ul>
-<li>Starting capital (config): $300</li><li>Risk per trade: 0.5% of equity</li>
-<li>Daily loss limit: 2% of equity, counting realized and unrealized losses</li><li>Max positions: 2; max combined open risk 1%</li>
-<li>Leverage: 1x (2x tested for research only)</li><li>Coins: BTC, ETH, SOL, HYPE · setups A retest / B momentum / C rejection · 15m/5m/1m (1h context)</li></ul></div>
-<div class=card><h2>Evaluation: historical simulation, not real paper trades</h2>
-<p>Backtest on public Hyperliquid candles, with fees, funding, slippage and minimum order sizes. None of these fills are real-time paper trades.</p>
-<table><tr><th>window</th><th>profile</th><th>trades</th><th>win</th><th>net $</th><th>exp R</th><th>PF</th><th>fees $</th><th>maxDD %</th></tr><tr><td>W1_1m (3.47d, 1m bars)</td><td>conservative</td><td>9</td><td>33%</td><td>-1.63</td><td>-0.241</td><td>0.7</td><td>1.49</td><td>1.3</td></tr><tr><td>W1_1m (3.47d, 1m bars)</td><td>aggressive_1x</td><td>22</td><td>59%</td><td>+13.50</td><td>0.496</td><td>2.14</td><td>5.60</td><td>1.87</td></tr><tr><td>W1_1m (3.47d, 1m bars)</td><td>aggressive_2x_research</td><td>14</td><td>71%</td><td>+14.28</td><td>0.844</td><td>2.77</td><td>5.49</td><td>1.09</td></tr><tr><td>W2_5m (15.36d, 5m bars)</td><td>conservative</td><td>26</td><td>42%</td><td>+0.65</td><td>0.036</td><td>1.04</td><td>4.32</td><td>1.48</td></tr><tr><td>W2_5m (15.36d, 5m bars)</td><td>aggressive_1x</td><td>88</td><td>33%</td><td>-19.73</td><td>-0.296</td><td>0.72</td><td>19.99</td><td>7.06</td></tr><tr><td>W2_5m (15.36d, 5m bars)</td><td>aggressive_2x_research</td><td>66</td><td>39%</td><td>-9.48</td><td>-0.099</td><td>0.86</td><td>22.79</td><td>6.52</td></tr></table>
-<p><b>Backtest caveat:</b> over the 15-day window this profile lost money after costs, with fees about equal to the loss. The live forward test above is how we check it on real-time data.</p></div>
-<p style="opacity:.6;font-size:12px">Published 2026-11-05 19:45 (PHT, UTC+8) · status.json has the same data</p></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0a0b0d"><title>AGGRESSIVE paper · agg-v1 · Desk</title>
+<style>
+:root{--bg:#0a0b0d;--p:#15171b;--p2:#1c1f24;--ln:#262a31;--tx:#e8eaed;--mu:#7d8590;--g:#39ff88;--r:#ff4d5e;--b:#4da3ff;--pu:#a78bfa;--c:#22d3ee;--o:#ffa94d;
+--sans:system-ui,-apple-system,"Segoe UI",Inter,Roboto,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 var(--sans)}
+.w{max-width:1100px;margin:auto;padding:14px 12px 40px}.m{font-family:var(--mono);font-variant-numeric:tabular-nums}
+header{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-bottom:12px}header h1{font-size:20px;margin:0;font-weight:650;letter-spacing:-.01em}
+.sub{color:var(--mu);font-size:12px}.sp{flex:1}.clk{color:var(--mu);font-size:13px}
+.badge{display:inline-flex;align-items:center;gap:7px;padding:4px 11px;border-radius:99px;font:600 12px var(--sans);border:1px solid var(--ln);background:var(--p)}
+.badge i{width:8px;height:8px;border-radius:50%;background:var(--mu)}.live{color:var(--g);border-color:#1f5c3a}.live i{background:var(--g);animation:pl 1.8s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 #39ff8899}70%{box-shadow:0 0 0 8px #39ff8800}100%{box-shadow:0 0 0 0 #39ff8800}}
+.stale{color:var(--mu)}.pap{font-size:11px;color:var(--o);border:1px solid #5a3d1e;border-radius:99px;padding:3px 10px}
+.tick{display:flex;gap:22px;overflow-x:auto;white-space:nowrap;background:var(--p);border:1px solid var(--ln);border-radius:12px;padding:9px 14px;margin-bottom:12px;font-size:13px}
+.tick b{font-weight:500;color:var(--mu);margin-right:6px}.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:12px}@media(max-width:780px){.grid{grid-template-columns:1fr}}
+.pn{background:var(--p);border:1px solid var(--ln);border-radius:16px;padding:14px;animation:fi .4s ease}@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1}}
+.pn h2{margin:0 0 10px;font:600 11px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mu)}
+.big{font-size:38px;font-weight:600;letter-spacing:-.02em}.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:4px}
+.pill{padding:3px 9px;border-radius:99px;background:var(--p2);font-size:12px}.up{color:var(--g)}.dn{color:var(--r)}.ne{color:var(--mu)}
+svg{width:100%;height:130px;display:block;margin-top:10px}
+.desk div.r{display:grid;grid-template-columns:12px 84px 1fr;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--ln)}.desk div.r:last-child{border:0}
+.desk i{width:10px;height:10px;border-radius:3px}.desk .role{font-weight:600;font-size:13px}.desk .val{font-size:12px;color:#c5cad1;overflow-wrap:anywhere}
+.log{max-height:300px;overflow-y:auto;font-size:12px}.log div{display:grid;grid-template-columns:auto auto 1fr;gap:8px;padding:5px 0;border-bottom:1px dashed var(--ln)}
+.tg{font:600 10px var(--mono);padding:1px 6px;border-radius:5px;text-transform:uppercase}.t-state{color:var(--b);background:#4da3ff1a}.t-warn{color:var(--o);background:#ffa94d1a}.t-trade{color:var(--g);background:#39ff881a}.t-block{color:var(--r);background:#ff4d5e1a}.t-news{color:var(--pu);background:#a78bfa1a}
+.bar{display:grid;grid-template-columns:120px 1fr 34px;gap:8px;align-items:center;font-size:12px;margin:5px 0}.bar span{height:8px;border-radius:4px;background:var(--c);opacity:.85}
+table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--ln)}th{color:var(--mu);font-weight:500}.tw{overflow-x:auto}
+.mt{margin-top:12px}footer{color:var(--mu);font-size:11px;text-align:center;margin-top:16px}
+.ban{background:#b3261e;color:#fff;font-weight:700;padding:10px 14px;border-radius:12px;margin-bottom:12px;font-size:13px;letter-spacing:.02em}.ban a{color:#ffe1dc}
+#toasts{position:fixed;right:12px;bottom:12px;display:flex;flex-direction:column;gap:8px;z-index:9;max-width:92vw}
+.toast{background:var(--p2);border:1px solid var(--ln);border-left:3px solid var(--b);border-radius:10px;padding:9px 12px;font-size:12px;animation:ti .3s ease,to .5s ease 6s forwards}
+@keyframes ti{from{transform:translateX(30px);opacity:0}}@keyframes to{to{opacity:0;transform:translateX(30px)}}
+</style></head><body><div class="w">
+<div class="ban">AGGRESSIVE PROFILE · PAPER ONLY · PARALLEL FORWARD TEST · SEPARATE ACCOUNT FROM THE CONSERVATIVE BOT</div>
+<header><div><h1>Aggressive Paper Trader · agg-v1</h1><div class="sub">Hyperliquid BTC/ETH/SOL/HYPE · aggressive profile · <span id="fs">FORWARD_PAPER</span> · conservative bot: <a style="color:#4da3ff" href="https://deeeee13.github.io/btc-live-q7x3/">btc-live-q7x3</a></div></div><div class="sp"></div>
+<span class="pap">Paper only · separate virtual $300 · no real money</span><span class="clk m" id="clk"></span><span class="badge stale" id="bd"><i></i>Stale</span></header>
+<div class="tick m" id="tk">Loading…</div><div id="app"></div><footer id="ft"></footer></div><div id="toasts"></div>
+<script>
+const $=s=>document.getElementById(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const f=(n,d=2)=>n==null?'—':Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const usd=n=>n==null?'—':(n<0?'-$':'$')+f(Math.abs(n)),sg=n=>n>0?'up':n<0?'dn':'ne',pm=n=>(n>0?'+':'')+f(n);
+const mnl=(ms,s)=>ms?new Date(ms).toLocaleString('en-GB',{timeZone:'Asia/Manila',...(s?{hour:'2-digit',minute:'2-digit',second:'2-digit'}:{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}):'—';
+const age=ms=>{if(!ms)return'—';const s=Math.max(0,Math.round((Date.now()-ms)/1e3));return s<90?s+'s':s<5400?Math.round(s/60)+'m':Math.round(s/3600)+'h'};
+setInterval(()=>$('clk').textContent=new Date().toLocaleTimeString('en-GB',{timeZone:'Asia/Manila'})+' MNL',1000);
+function curve(p){if(!p||p.length<2)return'';const xs=p.map(q=>q[0]),ys=p.map(q=>q[1]);let x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);if(y1-y0<.01){y0-=.5;y1+=.5}
+const W=600,H=130,X=x=>(x-x0)/((x1-x0)||1)*W,Y=y=>H-6-(y-y0)/(y1-y0)*(H-12),d=p.map((q,i)=>(i?'L':'M')+X(q[0]).toFixed(1)+' '+Y(q[1]).toFixed(1)).join('');
+return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="gg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#39ff88" stop-opacity=".25"/><stop offset="1" stop-color="#39ff88" stop-opacity="0"/></linearGradient></defs><path d="${d}L${W} ${H}L0 ${H}Z" fill="url(#gg)"/><path d="${d}" fill="none" stroke="#39ff88" stroke-width="2" vector-effect="non-scaling-stroke"/></svg><div class="sub m">range ${usd(y0)} – ${usd(y1)} · ${p.length} pts</div>`}
+function toast(m,c){const t=document.createElement('div');t.className='toast';t.style.borderLeftColor=c;t.innerHTML=m;$('toasts').appendChild(t);setTimeout(()=>t.remove(),7000)}
+let prev=null,seen=null;
+function render(s){
+ const fresh=(Date.now()-(s.published_at||0))<180e3&&s.worker_running,bd=$('bd');bd.className='badge '+(fresh?'live':'stale');bd.innerHTML='<i></i>'+(fresh?'Live':'Stale');
+ const ref=prev&&prev.btc_price!=null?prev.btc_price:s.prev_btc_price,ch=(s.btc_price!=null&&ref)?s.btc_price-ref:null;
+ const sc={ACTIVE:'up',HALTED:'dn',PAUSED:'dn'}[s.state]||'ne';
+ $('tk').innerHTML=`<span><b>BTC-PERP</b>${usd(s.btc_price)}</span>${ch!=null?`<span class="${sg(ch)}"><b>Δ since last</b>${pm(ch)} (${pm(ch/ref*100)}%)</span>`:''}<span><b>STATE</b><span class="${sc}">${esc(s.state)}</span></span><span><b>LEV</b>${s.leverage}x</span><span><b>HEARTBEAT</b>${age(s.heartbeat_ts)} ago</span>`;
+ const pnl=s.equity-s.start,mult=s.equity/s.start,p=s.position,last=s.trades&&s.trades.length?s.trades[s.trades.length-1]:null,lsc=s.state_changes&&s.state_changes[s.state_changes.length-1];
+ const halted=s.state==='HALTED',L=s.levels||{};
+ const rows=[['var(--c)','Feed',`socket ${esc(s.socket||'?')} · ${s.reconnects??0} reconnects · hb ${age(s.heartbeat_ts)} ago`],
+ ['var(--pu)','Levels',(L.support||L.resistance)?`S ${usd(L.support)} · R ${usd(L.resistance)} <span class="ne">(1h, approx)</span>`:''],
+ ['var(--b)','Signal',s.pending?`pending ${esc(s.pending.direction||'')} setup${s.pending.entry_price?' @ '+usd(s.pending.entry_price):''}`:'no setup'],
+ [halted?'var(--r)':'var(--g)','Risk',`${f(s.risk_pct)}%/trade · ${f(s.daily_limit_pct)}% daily · today <span class="${sg(s.daily_realized)}">${usd(s.daily_realized)}</span> / -${usd(s.start*s.daily_limit_pct/100)} · ${halted?'<span class="dn">HALTED</span>':'no halt'}`],
+ ['var(--o)','Executor',(s.positions&&s.positions.length)?s.positions.map(q=>`${esc(q.coin)} ${esc(q.direction)} ${esc(q.setup||'')} ${f(q.size,4)} @ ${usd(q.entry_price)} · SL ${usd(q.stop_price)} · TP ${usd(q.target_price)} · uPnL <span class="${sg(q.unrealized)}">${usd(q.unrealized)}</span>`).join('<br>'):p?`${esc(p.coin||'BTC')} ${esc(p.direction)} ${f(p.size,5)} @ ${usd(p.entry_price)} · SL ${usd(p.stop_price)} · TP ${usd(p.target_price)} · uPnL <span class="${sg(s.unrealized)}">${usd(s.unrealized)}</span>`:last?`flat · last: ${esc(last.dir)} ${usd(last.pnl)} (${esc(last.reason)})`:'flat · no trades yet'],
+ ['var(--mu)','Logger',lsc?`${esc(lsc.from)} → ${esc(lsc.to)} · ${esc(lsc.reason)} · ${mnl(lsc.ts,1)}`:'']];
+ let h=`<div class="grid"><div class="pn"><h2>Equity</h2><div class="big m">${usd(s.equity)}</div><div class="row m"><span class="${sg(pnl)}">${pm(pnl)} USD</span><span class="${sg(pnl)}">${pm(s.return_pct)}%</span><span class="pill">${f(mult,3)}x</span><span class="pill"><span class="up">${s.wins}W</span> / <span class="dn">${s.losses}L</span></span>${s.n_trades?`<span class="pill">win ${f(s.win_rate,1)}%</span><span class="pill">DD ${f(s.max_dd_pct)}%</span><span class="pill">fees ${usd(s.fees)}</span>`:''}</div>${curve(s.equity_series)}</div>
+ <div class="pn desk"><h2>Desk</h2>${rows.map(r=>`<div class="r"><i style="background:${r[0]}"></i><span class="role">${r[1]}</span><span class="val m">${r[2]}</span></div>`).join('')}</div></div>`;
+ const sy=Object.entries(s.symbols||{});if(sy.length)h+=`<div class="pn mt"><h2>Markets · ${sy.length} perps · shared $${f(s.start,0)} · max ${s.max_positions||1} open</h2><div class="tw"><table class="m"><tr><th>Coin</th><th>Price</th><th>State</th><th>Feed</th><th>Position</th></tr>${sy.map(([c,r])=>`<tr><td><b>${esc(c)}</b></td><td>${usd(r.price)}</td><td class="${r.state==='ACTIVE'?'up':r.state==='HALTED'?'dn':''}">${esc(r.state)}${r.reasons&&r.reasons.length?` <span class="ne">· ${esc(r.reasons.join(', '))}</span>`:''}</td><td>${r.stale?'<span class="dn">stale</span>':'live'}${r.trade_age_ms!=null?` <span class="ne">${(r.trade_age_ms/1000).toFixed(1)}s</span>`:''}</td><td>${r.position?`${esc(r.position.direction)} @ ${usd(r.position.entry_price)}`:r.pending?'pending setup':'flat'}</td></tr>`).join('')}</table></div></div>`;
+ const ev=(s.events||[]).slice().reverse();
+ h+=`<div class="grid mt">${ev.length?`<div class="pn"><h2>Event log</h2><div class="log m">${ev.map(e=>`<div><span class="ne">${mnl(e.ts,1)}</span><span class="tg t-${e.t}">${e.t}</span><span>${esc(e.msg)}${e.why?` <span class="ne">· ${esc(e.why)}</span>`:''}</span></div>`).join('')}</div></div>`:''}`;
+ const wt=Object.entries(s.why_tally||{}).sort((a,b)=>b[1]-a[1]);if(wt.length){const mx=wt[0][1];h+=`<div class="pn"><h2>Why it waited</h2>${wt.map(([k,v])=>`<div class="bar m"><span class="ne" style="background:none;height:auto;opacity:1">${esc(k)}</span><span style="width:${v/mx*100}%"></span><b>${v}</b></div>`).join('')}<div class="sub">count of reasons on moves into PAUSED / WAIT / HALTED</div></div>`}
+ h+='</div>';
+ if(s.trades&&s.trades.length)h+=`<div class="pn mt"><h2>Trade history</h2><div class="tw"><table class="m"><tr><th>Closed</th><th>Coin</th><th>Side</th><th>Entry</th><th>Exit</th><th>Reason</th><th>Fees</th><th>Net</th></tr>${s.trades.slice().reverse().map(t=>`<tr><td>${mnl(t.exit_ts)}</td><td>${esc(t.coin||'BTC')}</td><td>${esc(t.dir)}</td><td>${usd(t.entry)}</td><td>${usd(t.exit)}</td><td>${esc(t.reason)}</td><td>${usd(t.fees)}</td><td class="${sg(t.pnl)}">${usd(t.pnl)}</td></tr>`).join('')}</table></div></div>`;
+ if(s.historical&&s.historical.length)h+=`<div class="pn mt" style="border-color:#5a3d1e"><h2>Historical simulation · NOT live paper results</h2><div class="sub">Backtest on public Hyperliquid candles with fees, funding, slippage. None of these are real-time paper trades.</div><div class="tw"><table class="m"><tr><th>Window</th><th>Profile</th><th>Trades</th><th>Win</th><th>Net $</th><th>Exp R</th><th>PF</th><th>Fees</th><th>MaxDD%</th></tr>${s.historical.map(r=>`<tr><td>${esc(r.window)}</td><td>${esc(r.profile)}</td><td>${r.trades}</td><td>${r.win_rate==null?'—':f(r.win_rate*100,0)+'%'}</td><td class="${sg(r.net)}">${pm(r.net)}</td><td>${esc(r.exp_r)}</td><td>${esc(r.pf)}</td><td>${usd(r.fees)}</td><td>${esc(r.dd)}</td></tr>`).join('')}</table></div><p class="sub"><b class="o" style="color:var(--o)">Caveat:</b> over the 15-day window this profile lost money after costs, with fees about equal to the loss. The live forward test above is the real check.</p></div>`;
+ $('fs').textContent=s.status||'';
+ $('app').innerHTML=h;$('ft').textContent=`snapshot ${mnl(s.published_at,1)} MNL (${age(s.published_at)} ago) · refresh 30s · aggressive paper forward test · separate $300 account`;
+ const last_ts=Math.max(0,...(s.events||[]).map(e=>e.ts));
+ if(seen!=null)(s.events||[]).filter(e=>e.ts>seen).forEach(e=>toast(`<b>${esc(e.t.toUpperCase())}</b> ${esc(e.msg)}${e.why?' · '+esc(e.why):''}`,{trade:'#39ff88',block:'#ff4d5e',warn:'#ffa94d',news:'#a78bfa'}[e.t]||'#4da3ff'));
+ seen=Math.max(seen||0,last_ts)}
+let cur=null;async function load(){try{const r=await fetch('status.json?t='+Date.now(),{cache:'no-store'});const s=await r.json();if(cur&&s.published_at!==cur.published_at)prev={btc_price:cur.btc_price};cur=s;}catch(e){}if(cur)render(cur);}
+load();setInterval(load,30000);
+</script></body></html>
