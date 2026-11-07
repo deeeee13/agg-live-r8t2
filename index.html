@@ -21,7 +21,7 @@ svg{width:100%;height:130px;display:block;margin-top:10px}
 .desk div.r{display:grid;grid-template-columns:12px 84px 1fr;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--ln)}.desk div.r:last-child{border:0}
 .desk i{width:10px;height:10px;border-radius:3px}.desk .role{font-weight:600;font-size:13px}.desk .val{font-size:12px;color:#c5cad1;overflow-wrap:anywhere}
 .log{max-height:300px;overflow-y:auto;font-size:12px}.log div{display:grid;grid-template-columns:auto auto 1fr;gap:8px;padding:5px 0;border-bottom:1px dashed var(--ln)}
-.tg{font:600 10px var(--mono);padding:1px 6px;border-radius:5px;text-transform:uppercase}.t-state{color:var(--b);background:#4da3ff1a}.t-warn{color:var(--o);background:#ffa94d1a}.t-trade{color:var(--g);background:#39ff881a}.t-block{color:var(--r);background:#ff4d5e1a}.t-news{color:var(--pu);background:#a78bfa1a}
+.tg{font:600 10px var(--mono);padding:1px 6px;border-radius:5px;text-transform:uppercase}.t-state{color:var(--b);background:#4da3ff1a}.t-warn{color:var(--o);background:#ffa94d1a}.t-trade{color:var(--g);background:#39ff881a}.t-block{color:var(--r);background:#ff4d5e1a}.t-signal{color:var(--pu);background:#a78bfa1a}.t-news{color:var(--pu);background:#a78bfa1a}
 .bar{display:grid;grid-template-columns:120px 1fr 34px;gap:8px;align-items:center;font-size:12px;margin:5px 0}.bar span{height:8px;border-radius:4px;background:var(--c);opacity:.85}
 table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--ln)}th{color:var(--mu);font-weight:500}.tw{overflow-x:auto}
 .mt{margin-top:12px}footer{color:var(--mu);font-size:11px;text-align:center;margin-top:16px}
@@ -47,21 +47,24 @@ return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGra
 function toast(m,c){const t=document.createElement('div');t.className='toast';t.style.borderLeftColor=c;t.innerHTML=m;$('toasts').appendChild(t);setTimeout(()=>t.remove(),7000)}
 let prev=null,seen=null;
 function render(s){
- const fresh=(Date.now()-(s.published_at||0))<180e3&&s.worker_running,bd=$('bd');bd.className='badge '+(fresh?'live':'stale');bd.innerHTML='<i></i>'+(fresh?'Live':'Stale');
+ const fresh=(Date.now()-(s.published_at||0))<180e3&&s.worker_running,bd=$('bd');bd.className='badge '+(fresh?'live':'stale');bd.innerHTML='<i></i>'+(fresh?'REST fresh':'REST stale');
  const ref=prev&&prev.btc_price!=null?prev.btc_price:s.prev_btc_price,ch=(s.btc_price!=null&&ref)?s.btc_price-ref:null;
  const sc={ACTIVE:'up',HALTED:'dn',PAUSED:'dn'}[s.state]||'ne';
  $('tk').innerHTML=`<span><b>BTC-PERP</b>${usd(s.btc_price)}</span>${ch!=null?`<span class="${sg(ch)}"><b>Δ since last</b>${pm(ch)} (${pm(ch/ref*100)}%)</span>`:''}<span><b>STATE</b><span class="${sc}">${esc(s.state)}</span></span><span><b>LEV</b>${s.leverage}x</span><span><b>HEARTBEAT</b>${age(s.heartbeat_ts)} ago</span>`;
  const pnl=s.equity-s.start,mult=s.equity/s.start,p=s.position,last=s.trades&&s.trades.length?s.trades[s.trades.length-1]:null,lsc=s.state_changes&&s.state_changes[s.state_changes.length-1];
  const halted=s.state==='HALTED',L=s.levels||{};
- const rows=[['var(--c)','Feed',`socket ${esc(s.socket||'?')} · ${s.reconnects??0} reconnects · hb ${age(s.heartbeat_ts)} ago`],
+ const rows=[['var(--c)','Feed',`REST not WebSocket · errors ${s.rest_errors??0} · source ${age(s.market_asof_ms)} · hb ${age(s.heartbeat_ts)} ago`],
  ['var(--pu)','Levels',(L.support||L.resistance)?`S ${usd(L.support)} · R ${usd(L.resistance)} <span class="ne">(1h, approx)</span>`:''],
  ['var(--b)','Signal',s.pending?`pending ${esc(s.pending.direction||'')} setup${s.pending.entry_price?' @ '+usd(s.pending.entry_price):''}`:'no setup'],
- [halted?'var(--r)':'var(--g)','Risk',`${f(s.risk_pct)}%/trade · ${f(s.daily_limit_pct)}% daily · today <span class="${sg(s.daily_realized)}">${usd(s.daily_realized)}</span> / -${usd(s.start*s.daily_limit_pct/100)} · ${halted?'<span class="dn">HALTED</span>':'no halt'}`],
+ [halted?'var(--r)':'var(--g)','Risk',`${f(s.risk_pct)}%/trade · ${f(s.daily_limit_pct)}% daily · net <span class="${sg(s.daily_net_pnl)}">${usd(s.daily_net_pnl)}</span> · realized ${usd(s.daily_realized)} / -${usd(s.start*s.daily_limit_pct/100)} · ${s.leverage}x ${esc(s.mode||'paper')} · ${halted?'<span class="dn">HALTED</span>':'no halt'}`],
  ['var(--o)','Executor',(s.positions&&s.positions.length)?s.positions.map(q=>`${esc(q.coin)} ${esc(q.direction)} ${esc(q.setup||'')} ${f(q.size,4)} @ ${usd(q.entry_price)} · SL ${usd(q.stop_price)} · TP ${usd(q.target_price)} · uPnL <span class="${sg(q.unrealized)}">${usd(q.unrealized)}</span>`).join('<br>'):p?`${esc(p.coin||'BTC')} ${esc(p.direction)} ${f(p.size,5)} @ ${usd(p.entry_price)} · SL ${usd(p.stop_price)} · TP ${usd(p.target_price)} · uPnL <span class="${sg(s.unrealized)}">${usd(s.unrealized)}</span>`:last?`flat · last: ${esc(last.dir)} ${usd(last.pnl)} (${esc(last.reason)})`:'flat · no trades yet'],
  ['var(--mu)','Logger',lsc?`${esc(lsc.from)} → ${esc(lsc.to)} · ${esc(lsc.reason)} · ${mnl(lsc.ts,1)}`:'']];
  let h=`<div class="grid"><div class="pn"><h2>Equity</h2><div class="big m">${usd(s.equity)}</div><div class="row m"><span class="${sg(pnl)}">${pm(pnl)} USD</span><span class="${sg(pnl)}">${pm(s.return_pct)}%</span><span class="pill">${f(mult,3)}x</span><span class="pill"><span class="up">${s.wins}W</span> / <span class="dn">${s.losses}L</span></span>${s.n_trades?`<span class="pill">win ${f(s.win_rate,1)}%</span><span class="pill">DD ${f(s.max_dd_pct)}%</span><span class="pill">fees ${usd(s.fees)}</span>`:''}</div>${curve(s.equity_series)}</div>
  <div class="pn desk"><h2>Desk</h2>${rows.map(r=>`<div class="r"><i style="background:${r[0]}"></i><span class="role">${r[1]}</span><span class="val m">${r[2]}</span></div>`).join('')}</div></div>`;
  const sy=Object.entries(s.symbols||{});if(sy.length)h+=`<div class="pn mt"><h2>Markets · ${sy.length} perps · shared $${f(s.start,0)} · max ${s.max_positions||1} open</h2><div class="tw"><table class="m"><tr><th>Coin</th><th>Price</th><th>State</th><th>Feed</th><th>Position</th></tr>${sy.map(([c,r])=>`<tr><td><b>${esc(c)}</b></td><td>${usd(r.price)}</td><td class="${r.state==='ACTIVE'?'up':r.state==='HALTED'?'dn':''}">${esc(r.state)}${r.reasons&&r.reasons.length?` <span class="ne">· ${esc(r.reasons.join(', '))}</span>`:''}</td><td>${r.stale?'<span class="dn">stale</span>':'live'}${r.trade_age_ms!=null?` <span class="ne">${(r.trade_age_ms/1000).toFixed(1)}s</span>`:''}</td><td>${r.position?`${esc(r.position.direction)} @ ${usd(r.position.entry_price)}`:r.pending?'pending setup':'flat'}</td></tr>`).join('')}</table></div></div>`;
+ const act=s.activity||{}, idle=act.no_trade_12h||{}, rej=Object.entries(act.rejects||{});
+ const ageMs=act.last_trade_age_ms, ageTxt=ageMs==null?'no fill on record':(ageMs/36e5).toFixed(2)+'h';
+ h+=`<div class="pn mt"><h2>12h book</h2><div class="sub">as of ${mnl(act.timestamp_ms,1)} · candidates ${act.candidates??0} · last fill age ${ageTxt} · ${esc(idle.status||'n/a')} · forcing trades ${idle.forcing_trades===false?'no':'yes'}</div>${rej.length?`<div class="sub">rejects ${rej.map(([k,v])=>esc(k)+' '+v).join(' · ')}</div>`:'<div class="sub">no rejection rows in the last 12h</div>'}</div>`;
  const ev=(s.events||[]).slice().reverse();
  h+=`<div class="grid mt">${ev.length?`<div class="pn"><h2>Event log</h2><div class="log m">${ev.map(e=>`<div><span class="ne">${mnl(e.ts,1)}</span><span class="tg t-${e.t}">${e.t}</span><span>${esc(e.msg)}${e.why?` <span class="ne">· ${esc(e.why)}</span>`:''}</span></div>`).join('')}</div></div>`:''}`;
  const wt=Object.entries(s.why_tally||{}).sort((a,b)=>b[1]-a[1]);if(wt.length){const mx=wt[0][1];h+=`<div class="pn"><h2>Why it waited</h2>${wt.map(([k,v])=>`<div class="bar m"><span class="ne" style="background:none;height:auto;opacity:1">${esc(k)}</span><span style="width:${v/mx*100}%"></span><b>${v}</b></div>`).join('')}<div class="sub">count of reasons on moves into PAUSED / WAIT / HALTED</div></div>`}
@@ -71,7 +74,7 @@ function render(s){
  $('fs').textContent=s.status||'';
  $('app').innerHTML=h;$('ft').textContent=`snapshot ${mnl(s.published_at,1)} MNL (${age(s.published_at)} ago) · refresh 30s · aggressive paper forward test · separate $300 account`;
  const last_ts=Math.max(0,...(s.events||[]).map(e=>e.ts));
- if(seen!=null)(s.events||[]).filter(e=>e.ts>seen).forEach(e=>toast(`<b>${esc(e.t.toUpperCase())}</b> ${esc(e.msg)}${e.why?' · '+esc(e.why):''}`,{trade:'#39ff88',block:'#ff4d5e',warn:'#ffa94d',news:'#a78bfa'}[e.t]||'#4da3ff'));
+ if(seen!=null)(s.events||[]).filter(e=>e.ts>seen).forEach(e=>toast(`<b>${esc(e.t.toUpperCase())}</b> ${esc(e.msg)}${e.why?' · '+esc(e.why):''}`,{trade:'#39ff88',block:'#ff4d5e',warn:'#ffa94d',signal:'#a78bfa',news:'#a78bfa'}[e.t]||'#4da3ff'));
  seen=Math.max(seen||0,last_ts)}
 let cur=null;async function load(){try{const r=await fetch('status.json?t='+Date.now(),{cache:'no-store'});const s=await r.json();if(cur&&s.published_at!==cur.published_at)prev={btc_price:cur.btc_price};cur=s;}catch(e){}if(cur)render(cur);}
 load();setInterval(load,30000);
